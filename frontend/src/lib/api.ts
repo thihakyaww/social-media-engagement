@@ -54,19 +54,35 @@ export interface DatasetInfo {
   numeric_stats: Record<string, Record<string, number>>;
 }
 
-async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
-  });
-  if (!res.ok) {
-    const error = await res.json().catch(() => ({ detail: res.statusText }));
-    throw new Error(error.detail || "API request failed");
+async function fetchWithRetry<T>(path: string, options?: RequestInit, retries = 2, delayMs = 3000): Promise<T> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(`${API_URL}${path}`, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          ...options?.headers,
+        },
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) {
+        const error = await res.json().catch(() => ({ detail: res.statusText }));
+        throw new Error(error.detail || "API request failed");
+      }
+      return res.json();
+    } catch (err) {
+      if (attempt < retries) {
+        await new Promise((r) => setTimeout(r, delayMs));
+        continue;
+      }
+      throw err;
+    }
   }
-  return res.json();
+  throw new Error("Request failed");
+}
+
+async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T> {
+  return fetchWithRetry<T>(path, options);
 }
 
 export async function getHealth() {

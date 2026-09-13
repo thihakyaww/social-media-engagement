@@ -51,6 +51,7 @@ export default function Dashboard() {
   const [info, setInfo] = useState<DatasetInfo | null>(null);
   const [preview, setPreview] = useState<DatasetPreview | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([getDatasetInfo(), getHealth(), getDatasetPreview()])
@@ -59,13 +60,33 @@ export default function Dashboard() {
         setPreview(previewData);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setError("Server is waking up, please wait and refresh the page.");
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-slate-500">Loading dashboard...</div>
+        <div className="text-center">
+          <div className="text-slate-500 mb-2">Loading dashboard...</div>
+          <div className="text-xs text-slate-400">First load may take up to 60 seconds</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center bg-amber-50 border border-amber-200 rounded-lg p-6 max-w-md">
+          <div className="text-amber-800 font-semibold mb-1">Server Waking Up</div>
+          <div className="text-sm text-amber-600 mb-3">{error}</div>
+          <button onClick={() => window.location.reload()} className="btn-primary text-sm">
+            Refresh Page
+          </button>
+        </div>
       </div>
     );
   }
