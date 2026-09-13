@@ -86,24 +86,26 @@ export default function Descriptive() {
 
             {/* Cluster Distribution Chart */}
             <h3 className="text-sm font-semibold text-slate-700 mb-3">Cluster Distribution</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={clusterDistribution}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-                <YAxis tick={{ fontSize: 11 }} />
-                <Tooltip
-                  formatter={(value, name) => {
-                    const num = typeof value === "number" ? value : parseFloat(String(value ?? 0));
-                    return [num.toLocaleString(), "Posts"];
-                  }}
-                />
-                <Bar dataKey="count" radius={[4, 4, 0, 0]}>
-                  {clusterDistribution.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            <div style={{ width: "100%", height: 200 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={clusterDistribution}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+                  <YAxis tick={{ fontSize: 11 }} />
+                  <Tooltip
+                    formatter={(value, name) => {
+                      const num = typeof value === "number" ? value : parseFloat(String(value ?? 0));
+                      return [num.toLocaleString(), "Posts"];
+                    }}
+                  />
+                  <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                    {clusterDistribution.map((_, i) => (
+                      <Cell key={i} fill={COLORS[i]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
 
             {/* Distribution percentage cards */}
             <div className="grid grid-cols-3 gap-2 mt-3">

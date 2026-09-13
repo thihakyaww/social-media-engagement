@@ -141,47 +141,51 @@ export default function Dashboard() {
           <h2 className="text-base font-semibold text-slate-800 mb-4">
             Engagement Class Distribution
           </h2>
-          <ResponsiveContainer width="100%" height={280}>
-            <PieChart>
-              <Pie
-                data={engagementData}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={90}
-                dataKey="value"
-                label={({ name, percent }) =>
-                  `${name || ""} (${((percent || 0) * 100).toFixed(1)}%)`
-                }
-              >
-                {engagementData.map((_, index) => (
-                  <Cell key={index} fill={COLORS[index]} />
-                ))}
-              </Pie>
-              <Tooltip
-                wrapperStyle={{ zIndex: 100 }}
-                formatter={(value, name) => {
-                  const num = typeof value === "number" ? value : parseFloat(String(value ?? 0));
-                  return [num.toLocaleString(), name];
-                }}
-              />
-            </PieChart>
-          </ResponsiveContainer>
+          <div style={{ width: "100%", height: 280 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={engagementData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={90}
+                  dataKey="value"
+                  label={({ name, percent }) =>
+                    `${name || ""} (${((percent || 0) * 100).toFixed(1)}%)`
+                  }
+                >
+                  {engagementData.map((_, index) => (
+                    <Cell key={index} fill={COLORS[index]} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  wrapperStyle={{ zIndex: 100 }}
+                  formatter={(value, name) => {
+                    const num = typeof value === "number" ? value : parseFloat(String(value ?? 0));
+                    return [num.toLocaleString(), name];
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         <div className="card overflow-visible">
           <h2 className="text-base font-semibold text-slate-800 mb-4">
             Posts by Platform
           </h2>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={platformData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} />
-              <Tooltip />
-              <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          <div style={{ width: "100%", height: 280 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={platformData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                <YAxis tick={{ fontSize: 12 }} />
+                <Tooltip />
+                <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
 
