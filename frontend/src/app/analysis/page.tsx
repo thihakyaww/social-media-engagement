@@ -486,7 +486,7 @@ export default function Analysis() {
       </div>
 
       {/* Additional Engagement Analysis - last section */}
-      <div className="card mb-6">
+      <div className="card mb-6 overflow-visible">
         <h2 className="text-base font-semibold text-slate-800 mb-4">
           Additional Engagement Analysis
         </h2>
