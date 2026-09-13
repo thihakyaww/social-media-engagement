@@ -107,7 +107,8 @@ export default function Predictive() {
             </div>
           </div>
           <div className="flex justify-center">
-            <ResponsiveContainer width="100%" height={240}>
+            <div style={{ width: "100%", height: 240 }}>
+            <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={targetDistribution}
@@ -131,6 +132,7 @@ export default function Predictive() {
                 />
               </PieChart>
             </ResponsiveContainer>
+            </div>
           </div>
         </div>
         <div className="flex justify-center gap-4 mt-2 text-xs text-slate-500">
@@ -208,7 +210,8 @@ export default function Predictive() {
         <h2 className="text-base font-semibold text-slate-800 mb-4">
           Feature Importance (Random Forest)
         </h2>
-        <ResponsiveContainer width="100%" height={350}>
+        <div style={{ width: "100%", height: 350 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart data={featureImportance} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis type="number" tick={{ fontSize: 11 }} />
@@ -227,6 +230,7 @@ export default function Predictive() {
             <Bar dataKey="importance" fill="#3b82f6" radius={[0, 4, 4, 0]} />
           </BarChart>
         </ResponsiveContainer>
+        </div>
         <p className="text-xs text-slate-500 mt-2">
           Follower_Count dominates importance (46.62%), followed by Platform_TikTok (14.54%).
         </p>
@@ -309,7 +313,8 @@ export default function Predictive() {
         <h2 className="text-base font-semibold text-slate-800 mb-4">
           Model Comparison (Radar)
         </h2>
-        <ResponsiveContainer width="100%" height={400}>
+        <div style={{ width: "100%", height: 400 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={radarData}>
             <PolarGrid stroke="#e2e8f0" />
             <PolarAngleAxis dataKey="metric" tick={{ fontSize: 12 }} />
@@ -339,6 +344,7 @@ export default function Predictive() {
             <Tooltip />
           </RadarChart>
         </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

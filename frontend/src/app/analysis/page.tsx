@@ -281,7 +281,8 @@ export default function Analysis() {
           <h2 className="text-base font-semibold text-slate-800 mb-4">
             Platform Distribution
           </h2>
-          <ResponsiveContainer width="100%" height={250}>
+          <div style={{ width: "100%", height: 250 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={platformData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis dataKey="name" tick={{ fontSize: 11 }} />
@@ -290,13 +291,15 @@ export default function Analysis() {
               <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </div>
 
         <div className="card">
           <h2 className="text-base font-semibold text-slate-800 mb-4">
             Time Period Distribution
           </h2>
-          <ResponsiveContainer width="100%" height={250}>
+          <div style={{ width: "100%", height: 250 }}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={timePeriodData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis dataKey="name" tick={{ fontSize: 11 }} />
@@ -305,6 +308,7 @@ export default function Analysis() {
               <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </div>
       </div>
 
@@ -312,7 +316,8 @@ export default function Analysis() {
         <h2 className="text-base font-semibold text-slate-800 mb-4">
           Content Type Distribution
         </h2>
-        <ResponsiveContainer width="100%" height={300}>
+        <div style={{ width: "100%", height: 300 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart data={contentTypeData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis dataKey="name" tick={{ fontSize: 10 }} angle={-45} textAnchor="end" height={60} />
@@ -321,13 +326,15 @@ export default function Analysis() {
             <Bar dataKey="value" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </div>
 
       <div className="card mb-6">
         <h2 className="text-base font-semibold text-slate-800 mb-4">
           Category Distribution
         </h2>
-        <ResponsiveContainer width="100%" height={300}>
+        <div style={{ width: "100%", height: 300 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart data={categoryData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis dataKey="name" tick={{ fontSize: 11 }} angle={-45} textAnchor="end" height={60} />
@@ -336,6 +343,7 @@ export default function Analysis() {
             <Bar dataKey="value" fill="#f59e0b" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </div>
 
       {/* Skewness */}
@@ -486,7 +494,8 @@ export default function Analysis() {
         <h3 className="text-sm font-semibold text-slate-700 mb-3">
           Median Engagement Rate by Platform
         </h3>
-        <ResponsiveContainer width="100%" height={280}>
+        <div style={{ width: "100%", height: 280 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart data={medianEngagementByPlatform} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis type="number" tick={{ fontSize: 11 }} />
@@ -512,6 +521,7 @@ export default function Analysis() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+        </div>
         <p className="text-xs text-slate-500 mt-2 mb-6">
           TikTok dominates with a median engagement rate of 11.015%, nearly 3x higher than YouTube (4.14%).
         </p>
@@ -519,7 +529,8 @@ export default function Analysis() {
         <h3 className="text-sm font-semibold text-slate-700 mb-3">
           High Engagement Rate by Content Type
         </h3>
-        <ResponsiveContainer width="100%" height={400}>
+        <div style={{ width: "100%", height: 400 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart data={highEngagementByContentType} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis
@@ -551,6 +562,7 @@ export default function Analysis() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+        </div>
         <p className="text-xs text-slate-500 mt-2">
           The percentage of posts within each content type that are classified as High Engagement
           (Engagement_Rate &ge; median). Stitch (96.9%) and Duet (93.95%) have the highest rates.
