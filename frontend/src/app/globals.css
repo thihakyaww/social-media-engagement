@@ -204,3 +204,17 @@ body {
   background: #dbeafe;
   color: #1e40af;
 }
+
+.recharts-wrapper {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.recharts-surface {
+  overflow: visible;
+}
+
+.recharts-wrapper rect {
+  outline: none !important;
+}
