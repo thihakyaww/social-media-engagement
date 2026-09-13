@@ -16,20 +16,21 @@
 
 * {
   box-sizing: border-box;
-}
-
-svg * {
-  border: 0 !important;
-}
-
-svg {
-  border: 0 !important;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e2e8f0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+svg, svg * {
+  border: 0 !important;
+  outline: 0 !important;
+  border-width: 0 !important;
 }
 
 .card {
