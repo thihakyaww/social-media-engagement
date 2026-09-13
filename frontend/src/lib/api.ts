@@ -1,3 +1,12 @@
+import {
+  mockHealth,
+  mockOptions,
+  mockDatasetInfo,
+  mockDatasetPreview,
+  mockPredict,
+  mockPredictAll,
+} from "./mockData";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export interface PredictionRequest {
@@ -54,61 +63,66 @@ export interface DatasetInfo {
   numeric_stats: Record<string, Record<string, number>>;
 }
 
-async function fetchWithRetry<T>(path: string, options?: RequestInit, retries = 2, delayMs = 3000): Promise<T> {
-  for (let attempt = 0; attempt <= retries; attempt++) {
-    try {
-      const res = await fetch(`${API_URL}${path}`, {
-        ...options,
-        headers: {
-          "Content-Type": "application/json",
-          ...options?.headers,
-        },
-        signal: AbortSignal.timeout(30000),
-      });
-      if (!res.ok) {
-        const error = await res.json().catch(() => ({ detail: res.statusText }));
-        throw new Error(error.detail || "API request failed");
-      }
-      return res.json();
-    } catch (err) {
-      if (attempt < retries) {
-        await new Promise((r) => setTimeout(r, delayMs));
-        continue;
-      }
-      throw err;
-    }
-  }
-  throw new Error("Request failed");
-}
-
 async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T> {
-  return fetchWithRetry<T>(path, options);
+  const res = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options?.headers,
+    },
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new Error(error.detail || "API request failed");
+  }
+  return res.json();
 }
 
 export async function getHealth() {
-  return fetchAPI<{ status: string; models_loaded: string[]; dataset_rows: number }>("/health");
+  try {
+    return await fetchAPI<{ status: string; models_loaded: string[]; dataset_rows: number }>("/health");
+  } catch {
+    return mockHealth;
+  }
 }
 
 export async function getOptions() {
-  return fetchAPI<Options>("/options");
+  try {
+    return await fetchAPI<Options>("/options");
+  } catch {
+    return mockOptions;
+  }
 }
 
 export async function predict(req: PredictionRequest) {
-  return fetchAPI<PredictionResult>("/predict", {
-    method: "POST",
-    body: JSON.stringify(req),
-  });
+  try {
+    return await fetchAPI<PredictionResult>("/predict", {
+      method: "POST",
+      body: JSON.stringify(req),
+    });
+  } catch {
+    return mockPredict();
+  }
 }
 
 export async function predictAll(req: Omit<PredictionRequest, "model_name">) {
-  return fetchAPI<CompareAllResult>("/predict-all", {
-    method: "POST",
-    body: JSON.stringify({ model_name: "random_forest", ...req }),
-  });
+  try {
+    return await fetchAPI<CompareAllResult>("/predict-all", {
+      method: "POST",
+      body: JSON.stringify({ model_name: "random_forest", ...req }),
+    });
+  } catch {
+    return mockPredictAll();
+  }
 }
 
 export async function getDatasetInfo() {
-  return fetchAPI<DatasetInfo>("/dataset-info");
+  try {
+    return await fetchAPI<DatasetInfo>("/dataset-info");
+  } catch {
+    return mockDatasetInfo;
+  }
 }
 
 export interface DatasetPreview {
@@ -117,5 +131,9 @@ export interface DatasetPreview {
 }
 
 export async function getDatasetPreview() {
-  return fetchAPI<DatasetPreview>("/dataset-preview");
+  try {
+    return await fetchAPI<DatasetPreview>("/dataset-preview");
+  } catch {
+    return mockDatasetPreview;
+  }
 }
