@@ -218,3 +218,17 @@ body {
 .recharts-wrapper rect {
   outline: none !important;
 }
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #f1f5f9;
+}
+
+.recharts-tooltip-cursor {
+  stroke: transparent !important;
+}
+
+.recharts-wrapper svg {
+  border: none !important;
+  outline: none !important;
+}
