@@ -4,8 +4,7 @@ A full-stack web application that analyzes social media engagement patterns and 
 
 ## Live Demo
 
-- **Frontend**: [social-media-engagement-lovat.vercel.app](https://social-media-engagement-lovat.vercel.app)
-- **Backend API**: [social-media-backend-m5b1.onrender.com](https://social-media-backend-m5b1.onrender.com)
+[social-media-engagement-mining.vercel.app](https://social-media-engagement-mining.vercel.app/)
 
 ---
 
