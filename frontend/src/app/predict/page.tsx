@@ -18,7 +18,7 @@ export default function Predict() {
   const [contentLength, setContentLength] = useState("");
   const [category, setCategory] = useState("");
   const [timePeriod, setTimePeriod] = useState("");
-  const [modelName, setModelName] = useState("random_forest");
+  const [modelName, setModelName] = useState("logistic_regression");
   const [mode, setMode] = useState<"single" | "compare">("single");
   const [loading, setLoading] = useState(false);
   const [singleResult, setSingleResult] =
