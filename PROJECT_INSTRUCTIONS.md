@@ -1,10 +1,8 @@
 # Social Media Engagement Data Mining Website
 
-## URGENT PROJECT INSTRUCTION
+## Project Instruction
 
-Build a complete working MVP website for my Data Mining project.
-
-My deadline is today.
+Build a complete working MVP website for the Data Mining project.
 
 Do not stop after each step to ask for permission.
 Inspect the existing files and make reasonable implementation decisions.
