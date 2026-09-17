@@ -14,7 +14,6 @@ import { Zap, BarChart3, Loader2 } from "lucide-react";
 export default function Predict() {
   const [options, setOptions] = useState<Options | null>(null);
   const [platform, setPlatform] = useState("");
-  const [followerCount, setFollowerCount] = useState("");
   const [contentType, setContentType] = useState("");
   const [contentLength, setContentLength] = useState("");
   const [category, setCategory] = useState("");
@@ -44,7 +43,6 @@ export default function Predict() {
     const payload = {
       model_name: modelName,
       Platform: platform,
-      Follower_Count: parseInt(followerCount) || 0,
       Content_Type: contentType,
       Content_Length: parseInt(contentLength) || 0,
       Category: category,
@@ -125,19 +123,6 @@ export default function Predict() {
                   </option>
                 ))}
               </select>
-            </div>
-
-            <div className={inputWrapper}>
-              <label className="form-label">Follower Count</label>
-              <input
-                type="number"
-                className="form-input"
-                value={followerCount}
-                onChange={(e) => setFollowerCount(e.target.value)}
-                min={0}
-                placeholder="e.g. 100000"
-                required
-              />
             </div>
 
             <div className={inputWrapper}>

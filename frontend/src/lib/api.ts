@@ -12,7 +12,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 export interface PredictionRequest {
   model_name: string;
   Platform: string;
-  Follower_Count: number;
   Content_Type: string;
   Content_Length: number;
   Category: string;

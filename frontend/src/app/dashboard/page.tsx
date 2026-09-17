@@ -147,7 +147,7 @@ export default function Dashboard() {
         </div>
         <div className="stat-card">
           <Target size={24} className="mx-auto text-blue-600 mb-2" />
-          <div className="text-xl sm:text-2xl font-bold text-slate-900">6</div>
+          <div className="text-xl sm:text-2xl font-bold text-slate-900">5</div>
           <div className="text-xs sm:text-sm text-slate-500">Selected Features</div>
         </div>
         <div className="stat-card">

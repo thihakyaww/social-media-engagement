@@ -20,54 +20,49 @@ import {
 } from "recharts";
 
 const featureImportance = [
-  { feature: "Follower_Count", importance: 0.4662 },
-  { feature: "Platform_TikTok", importance: 0.1454 },
-  { feature: "Content_Length", importance: 0.0668 },
-  { feature: "Platform_LinkedIn", importance: 0.0466 },
-  { feature: "Platform_YouTube", importance: 0.0452 },
-  { feature: "Content_Type_Stitch", importance: 0.0374 },
-  { feature: "Content_Type_Duet", importance: 0.0365 },
-  { feature: "Platform_Twitter", importance: 0.0238 },
-  { feature: "Content_Type_Video", importance: 0.0117 },
-  { feature: "Content_Type_Poll", importance: 0.0106 },
+  { feature: "Platform", importance: 0.1935 },
+  { feature: "Content_Type", importance: 0.1058 },
+  { feature: "Content_Length", importance: 0.0797 },
+  { feature: "Category", importance: 0.0765 },
+  { feature: "Time_Period", importance: 0.0387 },
 ];
 
 const modelPerformance = [
   {
     model: "Logistic Regression",
-    accuracy: 0.848,
-    precision: 0.8522,
-    recall: 0.842,
-    f1: 0.8471,
-    rocAuc: 0.9325,
-    cv: "0.8438 ± 0.0213",
+    accuracy: 0.696,
+    precision: 0.7917,
+    recall: 0.532,
+    f1: 0.6364,
+    rocAuc: 0.7694,
+    cv: "0.6888 ± 0.0249",
   },
   {
     model: "Decision Tree",
-    accuracy: 0.847,
-    precision: 0.8243,
-    recall: 0.882,
-    f1: 0.8522,
-    rocAuc: 0.9225,
-    cv: "0.8408 ± 0.0144",
+    accuracy: 0.680,
+    precision: 0.8750,
+    recall: 0.420,
+    f1: 0.5676,
+    rocAuc: 0.7528,
+    cv: "0.6804 ± 0.0200",
   },
   {
     model: "Random Forest",
-    accuracy: 0.854,
-    precision: 0.843,
-    recall: 0.87,
-    f1: 0.8563,
-    rocAuc: 0.934,
-    cv: "0.8462 ± 0.0148",
+    accuracy: 0.683,
+    precision: 0.8081,
+    recall: 0.480,
+    f1: 0.6023,
+    rocAuc: 0.7582,
+    cv: "0.6820 ± 0.0143",
   },
 ];
 
 const radarData = [
-  { metric: "Accuracy", LR: 84.8, DT: 84.7, RF: 85.4 },
-  { metric: "Precision", LR: 85.22, DT: 82.43, RF: 84.3 },
-  { metric: "Recall", LR: 84.2, DT: 88.2, RF: 87.0 },
-  { metric: "F1-Score", LR: 84.71, DT: 85.22, RF: 85.63 },
-  { metric: "ROC-AUC", LR: 93.25, DT: 92.25, RF: 93.4 },
+  { metric: "Accuracy", LR: 69.6, DT: 68.0, RF: 68.3 },
+  { metric: "Precision", LR: 79.17, DT: 87.50, RF: 80.81 },
+  { metric: "Recall", LR: 53.2, DT: 42.0, RF: 48.0 },
+  { metric: "F1-Score", LR: 63.64, DT: 56.76, RF: 60.23 },
+  { metric: "ROC-AUC", LR: 76.94, DT: 75.28, RF: 75.82 },
 ];
 
 const targetDistribution = [
@@ -167,15 +162,14 @@ export default function Predictive() {
         </div>
       </div>
 
-      {/* 6 Selected Features */}
+      {/* 5 Selected Features */}
       <div className="card mb-6">
         <h2 className="text-base font-semibold text-slate-800 mb-4">
-          6 Selected Features
+          5 Selected Features
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {[
             { name: "Platform", type: "categorical" },
-            { name: "Follower_Count", type: "numerical" },
             { name: "Content_Type", type: "categorical" },
             { name: "Content_Length", type: "numerical" },
             { name: "Category", type: "categorical" },
@@ -232,7 +226,7 @@ export default function Predictive() {
         </ResponsiveContainer>
         </div>
         <p className="text-xs text-slate-500 mt-2">
-          Follower_Count dominates importance (46.62%), followed by Platform_TikTok (14.54%).
+          Platform dominates importance (19.35%), followed by Content_Type (10.58%).
         </p>
       </div>
 
@@ -302,9 +296,9 @@ export default function Predictive() {
           </table>
         </div>
         <p className="text-sm text-slate-600">
-          <span className="font-medium">Best Model:</span> Random Forest
-          achieves the highest accuracy (85.4%), F1-Score (85.63%), and ROC-AUC
-          (93.40%), making it the primary model for deployment.
+          <span className="font-medium">Best Model:</span> Logistic Regression
+          achieves the highest accuracy (69.6%), F1-Score (63.64%), and ROC-AUC
+          (76.94%), making it the primary model for deployment.
         </p>
       </div>
 
@@ -318,7 +312,7 @@ export default function Predictive() {
           <RadarChart data={radarData}>
             <PolarGrid stroke="#e2e8f0" />
             <PolarAngleAxis dataKey="metric" tick={{ fontSize: 12 }} />
-            <PolarRadiusAxis tick={{ fontSize: 10 }} domain={[75, 100]} />
+            <PolarRadiusAxis tick={{ fontSize: 10 }} domain={[30, 100]} />
             <Radar
               name="Logistic Regression"
               dataKey="LR"

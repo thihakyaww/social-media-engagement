@@ -59,7 +59,6 @@ def load_models():
 class PredictionRequest(BaseModel):
     model_name: str = Field(..., description="Model to use: logistic_regression, decision_tree, or random_forest")
     Platform: str = Field(..., description="Social media platform")
-    Follower_Count: int = Field(..., ge=0, description="Number of followers")
     Content_Type: str = Field(..., description="Type of content")
     Content_Length: int = Field(..., ge=0, description="Content length in characters")
     Category: str = Field(..., description="Content category")
@@ -124,7 +123,6 @@ def predict(req: PredictionRequest):
 
     input_df = pd.DataFrame([{
         "Platform": req.Platform,
-        "Follower_Count": req.Follower_Count,
         "Content_Type": req.Content_Type,
         "Content_Length": req.Content_Length,
         "Category": req.Category,
@@ -148,7 +146,6 @@ def predict(req: PredictionRequest):
 def predict_all(req: PredictionRequest):
     input_df = pd.DataFrame([{
         "Platform": req.Platform,
-        "Follower_Count": req.Follower_Count,
         "Content_Type": req.Content_Type,
         "Content_Length": req.Content_Length,
         "Category": req.Category,
