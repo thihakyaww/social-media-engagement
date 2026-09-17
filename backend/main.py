@@ -28,9 +28,9 @@ models = {}
 df = None
 
 MODEL_FILES = {
-    "logistic_regression": "logistic_regression_model.joblib",
-    "decision_tree": "decision_tree_model.joblib",
-    "random_forest": "random_forest_model.joblib",
+    "logistic_regression": "logistic_regression_model.pkl",
+    "decision_tree": "decision_tree_model.pkl",
+    "random_forest": "random_forest_model.pkl",
 }
 
 PLATFORM_VALUES = ["Instagram", "Twitter", "Facebook", "TikTok", "LinkedIn", "YouTube"]
